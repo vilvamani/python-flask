@@ -9,7 +9,11 @@
   <description>Demo python flask</description>
 
     <properties>
-        <sonar.sources>*.py</sonar.sources>
+        <sonar.exclusions>.pytest_cache/**/*, *.py</sonar.exclusions>
     </properties>
+
+    <build>
+        <sourceDirectory>.</sourceDirectory>
+    </build>
 
 </project>
