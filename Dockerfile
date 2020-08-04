@@ -1,6 +1,9 @@
 # pull official base image
 FROM python:3.8.1-slim-buster
 
+ARG app_version=not_set
+LABEL APP_VERSION=$app_version
+
 # set work directory
 WORKDIR /usr/src/app
 
