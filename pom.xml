@@ -11,8 +11,6 @@
     <properties>
         <sonar.exclusions>.pytest_cache/**/*, *.py, publish/**/*, target/**/*, reports.xml, htmlcov/**/*, coverage.xml</sonar.exclusions>
         <sonar.python.coverage.reportPath>coverage.xml</sonar.python.coverage.reportPath>
-        <sonar.projectKey>vilvamani_python-flask</sonar.projectKey>
-        <sonar.organization>vilvamani</sonar.organization>
     </properties>
 
     <build>

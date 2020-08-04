@@ -19,12 +19,12 @@ node{
     }
     
     stage("Python UnitTest"){
-        sh "py.test"
+        sh "python3 -m pytest test_*.py --junit-xml='reports.xml' --cov-report html --cov-report xml --cov-report term --cov"
     }
     
     stage("SonarQube"){
         withSonarQubeEnv('SonarQube') {
-            sh "mvn sonar:sonar -X"
+            sh "mvn verify sonar:sonar"
         }
     }
 }
