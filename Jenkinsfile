@@ -45,6 +45,6 @@ node{
     }
 
     stage("Build Docker Image"){
-        customImage = docker.build(docker_image_name, "--build-arg build_no=${env.BUILD_ID} --build-arg " + "git_commit_id=${git_commit} .")
+        customImage = docker.build(docker_image_name)
     }
 }

@@ -4,12 +4,6 @@ FROM python:3.8.1-slim-buster
 # set maintainer
 LABEL maintainer "vilvamani007@gmail.com"
 
-ARG build_no=not_set
-ARG git_commit_id=not_set
-
-LABEL BUILD_NO=$build_no
-LABEL GIT_COMMIT_ID=$git_commit_id
-
 # set work directory
 WORKDIR /usr/src/app
 
