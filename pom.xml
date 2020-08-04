@@ -9,7 +9,8 @@
   <description>Demo python flask</description>
 
     <properties>
-        <sonar.exclusions>.pytest_cache/**/*, *.py</sonar.exclusions>
+        <sonar.exclusions>.pytest_cache/**/*, *.py, publish/**/*, target/**/*, reports.xml, htmlcov/**/*, coverage.xml</sonar.exclusions>
+        <sonar.python.coverage.reportPath>coverage.xml</sonar.python.coverage.reportPath>
     </properties>
 
     <build>

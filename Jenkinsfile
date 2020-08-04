@@ -19,12 +19,11 @@ node{
     }
     
     stage("Python UnitTest"){
-        py.test
+        sh "py.test"
     }
     
     stage("SonarQube"){
         withSonarQubeEnv('SonarQube') {
-            sh "ls -l"
             sh "mvn sonar:sonar -X"
         }
     }
