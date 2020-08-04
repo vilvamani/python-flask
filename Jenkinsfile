@@ -2,6 +2,9 @@ node{
     def git_commit = ""
     def author_email = ""
     def customImage = ""
+    def docker_image_name = "python_flask_app"
+
+
     def mvnHome = tool 'M3'
     env.PATH = "${mvnHome}/bin:${env.PATH}"
     
@@ -42,6 +45,6 @@ node{
     }
 
     stage("Build Docker Image"){
-        customImage = docker.build("my-image:${env.BUILD_ID}")
+        customImage = docker.build(docker_image_name, "--build-arg build_no=${env.BUILD_ID} --build-arg " + "git_commit_id=${git_commit}.")
     }
 }
