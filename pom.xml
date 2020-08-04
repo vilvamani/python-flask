@@ -13,7 +13,6 @@
         <sonar.coverage.jacoco.xmlReportPaths>coverage.xml</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.projectKey>vilvamani_python-flask</sonar.projectKey>
         <sonar.organization>vilvamani</sonar.organization>
-        <sonar.language>py</sonar.language>
     </properties>
 
     <build>
