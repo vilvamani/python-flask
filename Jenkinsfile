@@ -2,7 +2,7 @@ node{
     def git_commit = ""
     def author_email = ""
     def customImage = ""
-    def docker_image_name = "python_flask_app"
+    def docker_image_name = "vilvamani007/python_flask_app"
 
 
     def mvnHome = tool 'M3'
@@ -46,5 +46,19 @@ node{
 
     stage("Build Docker Image"){
         customImage = docker.build(docker_image_name)
+    }
+
+    stage("Docker Push"){
+        // This step should not normally be used in your script. Consult the inline help for details.
+        withDockerRegistry(credentialsId: 'docker_hub', url: 'https://index.docker.io/v1/') {
+            customImage.push("${env.BUILD_NUMBER}")
+            customImage.push("${git_commit}")
+            customImage.push("latest")
+        }
+    }
+
+    stage("Docker CleanUp"){
+        // Remove dangling Docker images
+        sh "docker image prune --all --force"
     }
 }
