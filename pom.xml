@@ -14,6 +14,7 @@
         <sonar.coverage.exclusions>**__init__**,tests/**,*.py</sonar.coverage.exclusions>
         <sonar.projectKey>vilvamani_python-flask</sonar.projectKey>
         <sonar.organization>vilvamani</sonar.organization>
+        <sonar.language>py</sonar.language>
     </properties>
 
     <build>
