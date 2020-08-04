@@ -20,4 +20,4 @@ EXPOSE 5000
 
 # copy project
 COPY . /usr/src/app/
-CMD python /usr/src/app/flaskr/app.py run -h 0.0.0.0
+CMD python /usr/src/app/app.py run -h 0.0.0.0

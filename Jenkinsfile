@@ -57,6 +57,12 @@ node{
         }
     }
 
+    stage("Regression Test"){
+        customImage.inside(){
+            sh "newman run python-flask.postman_collection.json"
+        }
+    }
+
     stage("Docker CleanUp"){
         // Remove dangling Docker images
         sh "docker image prune --all --force"
