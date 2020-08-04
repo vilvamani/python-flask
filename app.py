@@ -10,13 +10,13 @@ app = Flask(__name__)
 # The route() function of the Flask class is a decorator,
 # which tells the application which URL should call  
 # the associated function.
-@app.route('/')
 # ‘/’ URL is bound with home() function.
+@app.route('/')
 def home():
     return 'Hello World'
 
-@app.route('/help')
 # ‘/help’ URL is bound with help() function.
+@app.route('/help')
 def help():
     return 'Connect with vilvamani007@gmail.com'
 
