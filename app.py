@@ -75,6 +75,21 @@ def get_book_id(book_id):
         return "Error: No id field provided. Please specify an id."
     return jsonify({'task': book[0]})
 
+@app.route('/api/v1/resources/books', methods=['POST'])
+def add_new_book():
+    if not request.json or not 'title' in request.json:
+        return "required fileds are missing"
+    
+    book = {
+        'id': books[-1]['id'] + 1,
+        'title': request.json['title'],
+        'author': request.json.get('author', ""),
+        'first_sentence': request.json.get('first_sentence', ""),
+        'published': request.json.get('published', ""),
+    }
+    books.append(book)
+    return jsonify({'book': book}), 201
+
 # ‘/help’ URL is bound with help() function.
 @app.route('/help')
 def help():
