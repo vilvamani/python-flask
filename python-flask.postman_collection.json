@@ -23,7 +23,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "X-Api-Key",
+						"value": "asoidewfoef",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:5000/",
 					"protocol": "http",
@@ -55,18 +61,24 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "X-Api-Key",
+						"value": "asoidewfoef",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:5000/help",
+					"raw": "http://localhost:5000",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
-					"path": [
-						"help"
-					]
+					"port": "5000"
 				}
 			},
 			"response": []
