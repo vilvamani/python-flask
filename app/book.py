@@ -2,7 +2,6 @@ from flask_restful import Resource, reqparse
 from flask import jsonify, make_response
 from flask_httpauth import HTTPBasicAuth
 
-
 # Create some test data for our catalog in the form of a list of dictionaries.
 books = [
     {'id': 0,
