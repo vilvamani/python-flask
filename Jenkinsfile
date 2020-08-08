@@ -29,13 +29,14 @@ node {
 
         stage("Python UnitTest") {
             sh "pip3 install -r requirements.txt"
-            sh "python3 -m pytest app/test_*.py --junit-xml='reports.xml' --cov-report html --cov-report xml --cov-report term --cov"
+            //sh "python3 -m pytest app/test_*.py --junit-xml='reports.xml' --cov-report html --cov-report xml --cov-report term --cov"
         }
 
         stage("Publish Report") {
-            publishHTML(target: [
+            /* publishHTML(target: [
                 allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'htmlcov', reportFiles: 'index.html', reportName: 'HTML_Report', reportTitles: 'Python UnitTest'
             ])
+            */
         }
 
         stage("SonarQube") {

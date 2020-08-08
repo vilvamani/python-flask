@@ -1,14 +1,14 @@
 from flask import Flask, request, make_response, jsonify
 from flask_restful import Api
-from .book import AllBooks, Book, NewBook
+import book
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
 api = Api(app)
-api.add_resource(AllBooks, '/api/v1/books')
-api.add_resource(Book, '/api/v1/book/<int:book_id>')
-api.add_resource(NewBook, '/api/v1/book')
+api.add_resource(book.AllBooks, '/api/v1/books')
+api.add_resource(book.Book, '/api/v1/book/<int:book_id>')
+api.add_resource(book.NewBook, '/api/v1/book')
 
 @app.errorhandler(404)
 def page_not_found(e):

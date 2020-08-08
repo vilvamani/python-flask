@@ -3,13 +3,6 @@
 if [ ! -f /debug0 ]; then
     touch /debug0
 
-    if [ -e requirements_os.txt ]; then
-        apt-get install -y $(cat requirements_os.txt)
-    fi
-    if [ -e requirements.txt ]; then
-        pip3 install -r requirements.txt
-    fi
-
     while getopts 'hd' flag; do
         case "${flag}" in
             h)
@@ -28,7 +21,7 @@ fi
 
 if [ -e /debug1 ]; then
     echo "Running app in debug mode!"
-    python3 app/app.py
+    python3 app/run.py
 else
     echo "Running app in production mode!"
     nginx && uwsgi --ini uwsgi.ini
