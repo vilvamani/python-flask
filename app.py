@@ -1,12 +1,7 @@
 # Importing flask module in the project is mandatory 
 # An object of Flask class is our WSGI application. 
-from flask import Flask, request, jsonify
-
-
-# Flask constructor takes the name of  
-# current module (__name__) as argument. 
-app = Flask(__name__)
-app.config["DEBUG"] = True
+from flask import Flask, request, jsonify, make_response
+from flask_httpauth import HTTPBasicAuth
 
 # Create some test data for our catalog in the form of a list of dictionaries.
 books = [
@@ -27,26 +22,32 @@ books = [
      'published': '1975'}
 ]
 
-# The route() function of the Flask class is a decorator,
-# which tells the application which URL should call  
-# the associated function.
-# ‘/’ URL is bound with home() function.
-@app.route('/', methods=['GET'])
-def home():
-    headers = request.headers
-    auth = headers.get("X-Api-Key")
-    if auth == 'asoidewfoef':
-        return jsonify({"message": "OK: Authorized"}), 200
-    else:
-        return jsonify({"message": "ERROR: Unauthorized"}), 401
+# Flask constructor takes the name of  
+# current module (__name__) as argument. 
+app = Flask(__name__)
+app.config["DEBUG"] = True
+
+auth = HTTPBasicAuth()
+
+@auth.get_password
+def get_password(username):
+    if username == 'vilva':
+        return 'devops'
+    return None
+
+@auth.error_handler
+def unauthorized():
+    return make_response(jsonify({'error': 'Unauthorized access'}), 403)
 
 # A route to return all of the available entries in our catalog.
 @app.route('/api/v1/resources/books/all', methods=['GET'])
+@auth.login_required
 def get_all_books():
     return jsonify(books)
 
 @app.route('/api/v1/resources/books', methods=['GET'])
-def api_filter():
+@auth.login_required
+def get_books():
     # Check if an ID was provided as part of the URL.
     # If ID is provided, assign it to a variable.
     # If no ID is provided, display an error in the browser.
@@ -68,14 +69,16 @@ def api_filter():
     # Python dictionaries to the JSON format.
     return jsonify(results)
 
-@app.route('/api/v1/resources/books/<int:book_id>', methods=['GET'])
-def get_book_id(book_id):
+@app.route('/api/v1/resources/book/<int:book_id>', methods=['GET'])
+@auth.login_required
+def get_book(book_id):
     book = [book for book in books if book['id'] == book_id]
     if len(book) == 0:
         return "Error: No id field provided. Please specify an id."
     return jsonify({'task': book[0]})
 
 @app.route('/api/v1/resources/books', methods=['POST'])
+@auth.login_required
 def add_new_book():
     if not request.json or not 'title' in request.json:
         return "required fileds are missing"
@@ -89,6 +92,28 @@ def add_new_book():
     }
     books.append(book)
     return jsonify({'book': book}), 201
+
+@app.route('/api/v1/resources/book/<int:book_id>', methods=['DELETE'])
+@auth.login_required
+def delete_book(book_id):
+    book = [book for book in books if book['id'] == book_id]
+    if len(book) == 0:
+        return "Error: Book not found"
+    books.remove(book[0])
+    return jsonify({'result': True})
+
+# The route() function of the Flask class is a decorator,
+# which tells the application which URL should call  
+# the associated function.
+# ‘/’ URL is bound with home() function.
+@app.route('/', methods=['GET'])
+def home():
+    headers = request.headers
+    auth = headers.get("X-Api-Key")
+    if auth == 'asoidewfoef':
+        return jsonify({"message": "OK: Authorized"}), 200
+    else:
+        return jsonify({"message": "ERROR: Unauthorized"}), 401
 
 # ‘/help’ URL is bound with help() function.
 @app.route('/help')
