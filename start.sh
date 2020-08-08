@@ -21,7 +21,7 @@ fi
 
 if [ -e /debug1 ]; then
     echo "Running app in debug mode!"
-    python3 app/run.py
+    python3 app/app.py
 else
     echo "Running app in production mode!"
     nginx && uwsgi --ini uwsgi.ini

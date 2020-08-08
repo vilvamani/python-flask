@@ -1,9 +1,11 @@
 from flask import Flask, request, make_response, jsonify
 from flask_restful import Api
 import book
+import logging
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
+logging.basicConfig(level=logging.DEBUG)
 
 api = Api(app)
 api.add_resource(book.AllBooks, '/api/v1/books')
@@ -27,4 +29,4 @@ def home():
 if __name__ == '__main__':
     # run() method of Flask class runs the application
     # on the local development server. 
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', threaded=True)
