@@ -50,7 +50,7 @@ node {
         }
 
         stage("Regression Test - Postman Collection") {
-            docker.image("${docker_image_name}:latest").withRun("-p 5000:5000") {
+            docker.image("${docker_image_name}:latest").withRun("-p 80:80") {
                 sh 'newman run python-flask.postman_collection.json --reporters cli,junit --reporter-junit-export "newman/myreport.xml"'
 
                 junit 'newman/myreport.xml'
