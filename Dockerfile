@@ -1,23 +1,29 @@
 # pull official base image
-FROM python:3.8.1-slim-buster
+FROM ubuntu:16.04
 
 # set maintainer
 LABEL maintainer "vilvamani007@gmail.com"
 
-# set work directory
-WORKDIR /app
+RUN apt-get update -y && \
+    apt-get install -y python3-pip python3-dev && \
+    apt-get install -y nginx uwsgi uwsgi-plugin-python3
 
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+COPY ./requirements.txt /requirements.txt
+COPY ./nginx.conf /etc/nginx/nginx.conf
+
+# set work directory
+WORKDIR /
 
 # install dependencies
 RUN pip3 install --upgrade pip
-COPY ./requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
-EXPOSE 5000
 
-# copy project
-COPY . /app
-CMD python /app/run.py run
+COPY . /
+
+RUN adduser --disabled-password --gecos '' nginx\
+  && chown -R nginx:nginx /app \
+  && chmod 777 /run/ -R \
+  && chmod 777 /root/ -R
+
+ENTRYPOINT [ "/bin/bash", "/start.sh"]
