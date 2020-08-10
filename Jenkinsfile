@@ -45,6 +45,12 @@ node {
             }
         }
 
+        stage("Snyk Vulnerability Scan") {
+            //snykSecurity(organisation: '20be9dd9-b33c-4860-96f1-072eecf66b40', projectName: 'python-flask', snykInstallation: 'Snyk', snykTokenId: 'snyktoken')
+            sh "mvn snyk:test"
+            sh "mvn snyk:monitor"
+        }
+
         stage("Build Docker Image") {
             customImage = docker.build(docker_image_name)
         }
