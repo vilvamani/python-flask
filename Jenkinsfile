@@ -51,6 +51,11 @@ node {
             sh "mvn snyk:monitor"
         }
 
+        stage("OWASP Dependancy Check"){
+            dependencyCheck additionalArguments: '', odcInstallation: 'owasp'
+            dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+        }
+
         stage("Build Docker Image") {
             customImage = docker.build(docker_image_name)
         }
