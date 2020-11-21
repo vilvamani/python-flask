@@ -21,7 +21,7 @@ params = [
     skip_docker_push: false,
     skip_kubernetes_deployment: true,
     dockerRepoName: 'vilvamani007',
-    dockerImageName: 'sprintboot',
+    dockerImageName: 'python-flask',
     kubeDeploymentFile: './infra/k8s-deployment.yaml',
     kubeServiceFile: './infra/k8s-service.yaml'
 ]
