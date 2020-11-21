@@ -13,7 +13,7 @@ jenkins_common_file = "jenkins_common_library.groovy"
 params = [
     branch_checkout_dir: 'service',
     branch: 'master',
-    repo_url: 'https://github.com/vilvamani/springboot.git',
+    repo_url: 'https://github.com/vilvamani/python-flask.git',
     skip_unit_test: false,
     skip_integration_test: true,
     skip_sonar: false,
