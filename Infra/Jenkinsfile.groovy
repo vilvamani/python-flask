@@ -19,6 +19,7 @@ params = [
     dockerImageName: 'python-flask',
     kubeDeploymentFile: './infra/k8s-deployment.yaml',
     kubeServiceFile: './infra/k8s-service.yaml',
+    jenkins_slack_channel: "infra-development",
     skip_unit_test: false,
     skip_integration_test: true,
     skip_sonar: false,
