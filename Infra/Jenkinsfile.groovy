@@ -12,18 +12,20 @@ jenkins_common_file = "jenkins_common_library.groovy"
 
 params = [
     branch_checkout_dir: 'service',
+    service: 'python-flask',
     branch: 'master',
     repo_url: 'https://github.com/vilvamani/python-flask.git',
+    dockerRepoName: 'vilvamani007',
+    dockerImageName: 'python-flask',
+    kubeDeploymentFile: './infra/k8s-deployment.yaml',
+    kubeServiceFile: './infra/k8s-service.yaml',
     skip_unit_test: false,
     skip_integration_test: true,
     skip_sonar: false,
     skip_artifactory: true,
     skip_docker_push: false,
     skip_kubernetes_deployment: true,
-    dockerRepoName: 'vilvamani007',
-    dockerImageName: 'python-flask',
-    kubeDeploymentFile: './infra/k8s-deployment.yaml',
-    kubeServiceFile: './infra/k8s-service.yaml'
+    skip_notification: false
 ]
 
 node('jenkins-slave') {
@@ -39,6 +41,8 @@ node('jenkins-slave') {
         } catch (Exception err) {
             currentBuild.result = 'FAILURE'
             throw err
+        } finally {
+            jenkinsLibrary.sendSlack(params)
         }
     }
 }
