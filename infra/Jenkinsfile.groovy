@@ -27,7 +27,7 @@ params = [
     skip_sonar: false,
     skip_artifactory: true,
     skip_docker_push: false,
-    skip_kubernetes_deployment: true,
+    skip_kubernetes_deployment: false,
     skip_notification: false
 ]
 
