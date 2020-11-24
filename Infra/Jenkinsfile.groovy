@@ -32,8 +32,6 @@ params = [
 ]
 
 node('python-slave') {
-    //def mvnHome = tool 'M3'
-    //env.PATH = "${mvnHome}/bin:${env.PATH}"
 
     step([$class: 'WsCleanup'])
     jenkinsLibrary = loadJenkinsCommonLibrary()
