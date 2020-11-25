@@ -39,6 +39,9 @@ node('python-slave') {
     timestamps {
         try {
             jenkinsLibrary.pythonFlaskBuild(params)
+        } catch (NoSuchMethodError err) {
+            currentBuild.result = 'FAILURE'
+            throw err
         } catch (Exception err) {
             currentBuild.result = 'FAILURE'
             throw err
