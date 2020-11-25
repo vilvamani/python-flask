@@ -1,19 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: python-flask-app
+  name: python-flask-microservice
+  labels:
+    app.kubernetes.io/name: python-microservice
+    app.kubernetes.io/component: microservice
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: python-flask-app
+        app.kubernetes.io/name: python-microservice
+        app.kubernetes.io/component: microservice
   template:
     metadata:
       labels:
-        app: python-flask-app
+        app.kubernetes.io/name: python-microservice
+        app.kubernetes.io/component: microservice
     spec:
       containers:
-        - name: python-flask-app
+        - name: python-flask-microservice
           image: IMAGE
           imagePullPolicy: IfNotPresent
           ports:
