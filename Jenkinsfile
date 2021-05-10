@@ -82,7 +82,7 @@ podTemplate(label: label, containers: [
             withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
             sh """
               #!/busybox/sh
-              /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=vilvamani007/springboot:${IMAGE_VERSION}
+              /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=algoshack/python-flask:${IMAGE_VERSION}
             """
             }
           }
