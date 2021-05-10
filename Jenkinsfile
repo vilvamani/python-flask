@@ -33,8 +33,8 @@ def slackNotifier(String buildResult) {
 podTemplate(label: label, containers: [
     containerTemplate(name: 'jnlp', image: 'jenkins/jnlp-slave:4.7-1-alpine', args: '${computer.jnlpmac} ${computer.name}', runAsGroup: '1000', runAsUser: '1000'),
     containerTemplate(name: 'sonarqube', image: 'sonarsource/sonar-scanner-cli:4.6', command: 'cat', ttyEnabled: true, runAsGroup: '1000', runAsUser: '1000'),
-    containerTemplate(name: 'maven', image: 'vilvamani007/k8s-docker-slave:maven', command: 'cat', ttyEnabled: true, runAsGroup: '1000', runAsUser: '1000'),
-    containerTemplate(name: 'python', image: 'vilvamani007/k8s-docker-slave:python', command: 'cat', ttyEnabled: true, runAsGroup: '1000', runAsUser: '1000'),
+    containerTemplate(name: 'maven', image: 'algoshack/k8s-docker-slave:maven', command: 'cat', ttyEnabled: true, runAsGroup: '1000', runAsUser: '1000'),
+    containerTemplate(name: 'python', image: 'algoshack/k8s-docker-slave:python', command: 'cat', ttyEnabled: true, runAsGroup: '1000', runAsUser: '1000'),
     containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: '/busybox/cat', ttyEnabled: true, privileged: true, runAsGroup: '0', runAsUser: '0'),
     containerTemplate(name: 'kubectl', image: 'bitnami/kubectl', command: 'cat', ttyEnabled: true, runAsGroup: '1000', runAsUser: '1000'),
   ],
