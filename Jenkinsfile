@@ -82,8 +82,6 @@ podTemplate(label: label, containers: [
             withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
             sh """
               #!/busybox/sh
-              cp newrelic/newrelic.jar ./newrelic.jar
-              rm -rf newrelic newrelic-java.zip
               /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --destination=vilvamani007/springboot:${IMAGE_VERSION}
             """
             }
